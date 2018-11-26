@@ -1,6 +1,7 @@
-# docker-template
+# docker-dante
 
-A minimal and secure [Alpine Linux][alpine] based [Docker][docker] image.
+A minimal and secure [Alpine Linux][alpine] based [Docker][docker] image with
+[Dante][dante] SOCKS server.
 
 ## Configuration
 
@@ -22,4 +23,5 @@ This project is licensed under the MIT License.
 
 [alpine]: https://alpinelinux.org/
 [docker]: https://www.docker.com/
+[dante]: https://www.inet.no/dante/index.html
 [docker-logs]: https://docs.docker.com/engine/reference/commandline/logs/

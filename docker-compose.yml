@@ -1,11 +1,10 @@
 version: '2.2'
 
 services:
-  template:
-    image: 0x022b/template
+  dante:
+    image: 0x022b/dante
     init: true
     restart: on-failure
-    network_mode: none
     cap_drop:
       - ALL
     cap_add:
@@ -18,6 +17,8 @@ services:
       - SETUID
     logging:
       driver: none
+    ports:
+      - 127.0.0.1:1080:1080
     tmpfs:
       - /run:rw,nodev,noexec,nosuid,size=16m
       - /tmp:rw,nodev,noexec,nosuid,size=16m

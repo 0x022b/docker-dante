@@ -1,5 +1,5 @@
 #!/bin/sh
-user='minion'
+user='sockd'
 uid="${HOST_UID:-$(shuf -i 1000-65533 -n 1)}"
 gid="${HOST_GID:-$uid}"
 home="/run/user/${uid}"
@@ -46,7 +46,9 @@ if [ -f '/proc/net/ipv6_route' ]; then
 fi
 
 if [ "$1" == 'container-daemon' ]; then
-    set -- '/bin/sh'
+    sleep 10
+
+    set -- '/usr/sbin/sockd' -f "/app/sockd.conf" -p "${home}/sockd.pid"
 fi
 
 exec '/sbin/su-exec' "${uid}:${gid}" "$@"

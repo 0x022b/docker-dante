@@ -6,11 +6,15 @@ CMD ["container-daemon"]
 VOLUME ["/app"]
 
 RUN \
+echo '@testing http://dl-cdn.alpinelinux.org/alpine/edge/testing' \
+>> '/etc/apk/repositories' && \
 apk upgrade --no-cache && \
 apk add --no-cache \
     ca-certificates \
+    dante-server@testing \
     iptables \
     ip6tables \
-    su-exec
+    su-exec && \
+deluser sockd
 
 COPY rootfs/ /
