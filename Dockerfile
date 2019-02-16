@@ -1,4 +1,4 @@
-FROM alpine:3.8
+FROM alpine:3.9
 LABEL maintainer="Janne K <0x022b@gmail.com>"
 
 ENTRYPOINT ["docker-entrypoint"]
