@@ -21,7 +21,7 @@ if ! '/bin/chown' -R "${uid}:${gid}" '/app'; then
     exit 1
 fi
 
-if [ -f '/proc/net/route' ]; then
+if '/sbin/ip' -4 route | '/bin/grep' -q $; then
     if ! '/sbin/iptables-save' | '/bin/grep' -qE '^\:ICMP\-'; then
         if ! '/sbin/iptables-restore' '/etc/iptables/default-policy'; then
             exit 1
@@ -37,7 +37,7 @@ if [ -f '/proc/net/route' ]; then
     fi
 fi
 
-if [ -f '/proc/net/ipv6_route' ]; then
+if '/sbin/ip' -6 route | '/bin/grep' -q $; then
     if ! '/sbin/ip6tables-save' | '/bin/grep' -qE '^\-'; then
         if ! '/sbin/ip6tables-restore' '/etc/iptables/default-policy'; then
             exit 1
