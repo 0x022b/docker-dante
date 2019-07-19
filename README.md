@@ -9,13 +9,18 @@ A minimal and secure [Alpine Linux][alpine] based [Docker][docker] image with
 
 Host user and group can be mapped to a container by defining `HOST_UID` and
 `HOST_GID` environment variables. If the variables are left undefined the
-container will execute its command as `nobody:nobody`.
+container will execute its command with a random UID/GID combination.
 
 ## Logging
 
 Container is compatible with `docker logs` command although logging is disabled
 by default if the container is started with `docker-compose` command. To find
 out more about logging see the command [reference][docker-logs].
+
+### Debug log
+
+To print out a trace of commands executed by `docker-entrypoint` script,
+set `DEBUG` environment variable to any non-null value.
 
 ## License
 

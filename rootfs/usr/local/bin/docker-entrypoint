@@ -1,6 +1,10 @@
 #!/bin/sh
+if [ -n "${DEBUG}" ]; then
+    set -x
+fi
+
 user='sockd'
-uid="${HOST_UID:-$(shuf -i 1000-65533 -n 1)}"
+uid="${HOST_UID:-$(shuf -i 10000-65533 -n 1)}"
 gid="${HOST_GID:-$uid}"
 home="/run/user/${uid}"
 
