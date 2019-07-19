@@ -5,6 +5,9 @@ ENTRYPOINT ["docker-entrypoint"]
 CMD ["container-daemon"]
 VOLUME ["/app"]
 
+EXPOSE 1080/tcp
+EXPOSE 1080/udp
+
 RUN \
 echo '@testing http://dl-cdn.alpinelinux.org/alpine/edge/testing' \
 >> '/etc/apk/repositories' && \
