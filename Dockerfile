@@ -1,7 +1,7 @@
 FROM alpine:3.11
 LABEL maintainer="Janne K <0x022b@gmail.com>"
 
-ENTRYPOINT ["docker-entrypoint"]
+ENTRYPOINT ["/sbin/tini", "--", "/usr/local/bin/container-entrypoint"]
 CMD ["container-daemon"]
 VOLUME ["/app"]
 
@@ -17,7 +17,8 @@ apk add --no-cache \
     dante-server@testing \
     iptables \
     ip6tables \
-    su-exec && \
+    su-exec \
+    tini && \
 deluser sockd
 
 COPY rootfs/ /

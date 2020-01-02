@@ -40,13 +40,4 @@
 -A OUTPUT -p tcp -j REJECT --reject-with tcp-reset
 -A OUTPUT -j REJECT --reject-with icmp-proto-unreachable
 
-# Accept outgoing ICMP echo requests
--A ICMP-OUTPUT -o eth+ -p icmp --icmp-type echo-request -j ACCEPT
-
-# Accept outgoing UDP connections
--A UDP-OUTPUT -o eth+ -p udp -j ACCEPT
-
-# Accept outgoing TCP connections
--A TCP-OUTPUT -o eth+ -p tcp -j ACCEPT
-
 COMMIT
