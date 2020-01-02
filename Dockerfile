@@ -10,7 +10,6 @@ apk add --no-cache \
     ca-certificates \
     iptables \
     ip6tables \
-    su-exec \
     tini
 
 VOLUME ["/app"]

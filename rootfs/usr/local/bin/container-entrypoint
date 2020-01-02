@@ -7,26 +7,6 @@ set -euo pipefail
 export PATH='/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
 readonly iface="${IFACE:-$(ip -4 route show 0/0 | awk '{ print $5 }')}"
 
-user='sockd'
-uid="${HOST_UID:-$(shuf -i 10000-65533 -n 1)}"
-gid="${HOST_GID:-$uid}"
-home="/run/user/${uid}"
-
-mkdir -p "${home}"
-
-if ! getent group "${gid}" > '/dev/null'; then
-    addgroup -g "${gid}" -S "${user}"
-fi
-
-if ! getent passwd "${uid}" > '/dev/null'; then
-    adduser -h "${home}" -s '/sbin/nologin' \
-        -g "${user}" -G "${user}" -SD -u "${uid}" "${user}"
-else
-    chown "${uid}:${gid}" "${home}"
-fi
-
-chown -R "${uid}:${gid}" '/app'
-
 if [ -n "$(ip -4 route | head -c 1)" ]; then
     if [ -z "$(iptables-save | head -c 1)" ]; then
         iptables-restore '/etc/iptables/default-policy'
@@ -54,4 +34,4 @@ if [ "$1" = 'container-daemon' ]; then
     set -- sockd -f "/tmp/sockd.conf" -p '/tmp/sockd.pid'
 fi
 
-exec su-exec "${uid}:${gid}" "$@"
+exec "$@"
