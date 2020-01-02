@@ -1,3 +1,3 @@
 # Accept incoming SOCKS connections
--A UDP-INPUT -i eth+ -p udp -m udp --dport 1080 -j ACCEPT
--A TCP-INPUT -i eth+ -p tcp -m tcp --dport 1080 -j ACCEPT
+-A UDP-INPUT -i {IFACE} -p udp -m udp --dport 1080 -j ACCEPT
+-A TCP-INPUT -i {IFACE} -p tcp -m tcp --dport 1080 -j ACCEPT
