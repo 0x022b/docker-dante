@@ -18,8 +18,7 @@ RUN \
 echo '@testing http://dl-cdn.alpinelinux.org/alpine/edge/testing' \
 >> '/etc/apk/repositories' && \
 apk add --no-cache \
-    dante-server@testing && \
-deluser sockd
+    dante-server@testing
 
 EXPOSE 1080/tcp
 EXPOSE 1080/udp
