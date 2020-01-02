@@ -51,7 +51,7 @@ if [ "$1" = 'container-daemon' ]; then
     sleep 10
     sed "s/{IFACE}/${iface}/g" < '/app/sockd.conf' > '/tmp/sockd.conf'
 
-    set -- '/usr/sbin/sockd' -f "/tmp/sockd.conf" -p '/tmp/sockd.pid'
+    set -- sockd -f "/tmp/sockd.conf" -p '/tmp/sockd.pid'
 fi
 
 exec su-exec "${uid}:${gid}" "$@"
