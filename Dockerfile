@@ -1,23 +1,28 @@
 FROM alpine:3.11
 LABEL maintainer="Janne K <0x022b@gmail.com>"
 
-ENTRYPOINT ["docker-entrypoint"]
+ENTRYPOINT ["/sbin/tini", "--", "/usr/local/bin/container-entrypoint"]
 CMD ["container-daemon"]
-VOLUME ["/app"]
 
-EXPOSE 1080/tcp
-EXPOSE 1080/udp
+RUN \
+apk upgrade --no-cache && \
+apk add --no-cache \
+    ca-certificates \
+    iptables \
+    ip6tables \
+    su-exec \
+    tini
+
+VOLUME ["/app"]
 
 RUN \
 echo '@testing http://dl-cdn.alpinelinux.org/alpine/edge/testing' \
 >> '/etc/apk/repositories' && \
-apk upgrade --no-cache && \
 apk add --no-cache \
-    ca-certificates \
-    dante-server@testing \
-    iptables \
-    ip6tables \
-    su-exec && \
+    dante-server@testing && \
 deluser sockd
+
+EXPOSE 1080/tcp
+EXPOSE 1080/udp
 
 COPY rootfs/ /

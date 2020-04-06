@@ -3,7 +3,6 @@ version: '2.2'
 services:
   dante:
     image: 0x022b/dante
-    init: true
     restart: on-failure
     cap_drop:
       - ALL
