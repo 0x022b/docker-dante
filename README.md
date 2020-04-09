@@ -49,7 +49,7 @@ set `DEBUG` environment variable to any non-null value.
 This project is licensed under the MIT License.
 
 [alpine]: https://alpinelinux.org/
-[docker]: https://www.docker.com/
 [dante]: https://www.inet.no/dante/index.html
+[docker]: https://www.docker.com/
 [docker-logs]: https://docs.docker.com/engine/reference/commandline/logs/
 [tini]: https://github.com/krallin/tini
