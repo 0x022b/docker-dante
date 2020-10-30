@@ -1,4 +1,4 @@
-# docker-dante
+# Dante container image
 
 ![Docker Build Status](https://img.shields.io/docker/cloud/build/0x022b/dante?style=flat-square)
 ![Docker Image Version](https://img.shields.io/docker/v/0x022b/dante?sort=semver&style=flat-square)
