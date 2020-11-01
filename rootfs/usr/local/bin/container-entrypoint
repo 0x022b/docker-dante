@@ -33,7 +33,7 @@ if [ -n "$(ip -4 route | head -c 1)" ]; then
         iptables-restore -n '/etc/iptables/ipv4-default'
     fi
 
-    grep -E '^-(A|I) ' '/etc/iptables/ipv4-custom' \
+    { grep -E '^-(A|I) ' '/etc/iptables/ipv4-custom' || :; } \
     | sed "s/{IFACE}/${iface}/g" \
     | while read -r rule; do
         check=$(printf '%s' "${rule}" | sed -E 's/^-.( \S+)( \d+)?(.+)/-C\1\3/')
