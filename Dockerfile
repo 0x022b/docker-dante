@@ -1,7 +1,7 @@
-FROM alpine:3.12
+FROM alpine:3.12.4
 LABEL maintainer="Janne K <0x022b@gmail.com>"
 
-ENTRYPOINT ["/sbin/tini", "--", "/usr/local/bin/container-entrypoint"]
+ENTRYPOINT ["/sbin/tini", "-g", "--", "/usr/local/bin/container-entrypoint"]
 CMD ["container-daemon"]
 
 RUN \
