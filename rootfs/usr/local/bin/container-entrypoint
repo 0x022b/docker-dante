@@ -29,7 +29,7 @@ fi
 
 chown -R "${uid}:${gid}" '/app'
 
-if [ -n "$(ip -4 route | head -c 1)" ]; then
+if [ -n "$(ip -4 route list scope link | head -c 1)" ]; then
     if [ -z "$(iptables-save | head -c 1)" ]; then
         iptables-restore '/etc/iptables/default-policy'
         iptables-restore -n '/etc/iptables/ipv4-default'
@@ -44,7 +44,7 @@ if [ -n "$(ip -4 route | head -c 1)" ]; then
     done
 fi
 
-if [ -n "$(ip -6 route | head -c 1)" ]; then
+if [ -n "$(ip -6 route list scope link | head -c 1)" ]; then
     if [ -z "$(ip6tables-save | head -c 1)" ]; then
         ip6tables-restore '/etc/iptables/default-policy'
     fi
