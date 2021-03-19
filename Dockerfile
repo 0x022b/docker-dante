@@ -1,10 +1,11 @@
-FROM alpine:3.12
+FROM alpine:3.12.4
 LABEL maintainer="Janne K <0x022b@gmail.com>"
 
-ENTRYPOINT ["/sbin/tini", "--", "/usr/local/bin/container-entrypoint"]
+ENTRYPOINT ["/sbin/tini", "-g", "--", "/usr/local/bin/container-entrypoint"]
 CMD ["container-daemon"]
 
 RUN \
+sed -i 's/http:/https:/' /etc/apk/repositories && \
 apk upgrade --no-cache && \
 apk add --no-cache \
     ca-certificates \
@@ -16,10 +17,8 @@ apk add --no-cache \
 VOLUME ["/app"]
 
 RUN \
-echo '@community http://dl-cdn.alpinelinux.org/alpine/edge/community' \
->> '/etc/apk/repositories' && \
 apk add --no-cache \
-    dante-server@community && \
+    dante-server && \
 deluser sockd
 
 EXPOSE 1080/tcp
